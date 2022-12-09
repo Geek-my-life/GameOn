@@ -23,7 +23,6 @@ body {
 
 p {
   margin-bottom: 0;
-  padding: 0.5vw;
 }
 
 img {
@@ -405,7 +404,7 @@ input[data-error]::after {
   font-size: 16px;
 }
 .hero-section {
-  min-height: 400px; /*93vh*/
+  min-height: 360px; /*93vh*/
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -443,7 +442,7 @@ input[data-error]::after {
 .hero-text {
   width: 146%;
   font-weight: normal;
-  margin-top: 57px;
+  margin-top: 80px;
   padding: 0;
 }
 .btn-signup {
@@ -452,11 +451,10 @@ input[data-error]::after {
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
-  margin-top: 59px;
+  margin-top: 80px;
 }
 .hero-img {
   grid-column: span 8;
-  overflow: cover;
 }
 .hero-img img {
   width: 100%;
