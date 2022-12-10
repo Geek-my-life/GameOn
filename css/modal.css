@@ -35,6 +35,12 @@ img {
 }
 .header-logo {
     float: left;
+    margin-top: 10px;
+}
+@media screen and (max-width: 768px) {
+  .header-logo img{
+    width: 60%;
+}
 }
 .main-navbar {
     float: right;
@@ -65,12 +71,16 @@ img {
 
 .topnav .icon {
   display: none;
+  font-size: 30px;
+  color: #ff0000;
+  position: absolute;
+  right: 10px;
+  top: 25px;
 }
 
 @media screen and (max-width: 768px) {
   .topnav a {display: none;}
   .topnav a.icon {
-    float: right;
     display: block;
   }
 }
@@ -439,6 +449,7 @@ input[data-error]::after {
   font-weight: normal;
   white-space: nowrap;
 }
+
 .hero-text {
   width: 146%;
   font-weight: normal;
@@ -484,7 +495,7 @@ footer {
   .hero-content {
     background: #fff;
     color: #000;
-    padding: 20px;
+    padding: 0px;
   }
   .hero-content::after {
     content: unset;
@@ -493,12 +504,13 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
+    font-size: 40px;
     white-space: normal;
   }
   .hero-text {
+    margin-top: 30px;
     width: unset;
-    font-size: 1.5rem;
+    font-size: 15px;
   }
   .hero-img img {
     border-radius: 10px;
