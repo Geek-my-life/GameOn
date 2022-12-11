@@ -27,15 +27,19 @@ const condition = document.getElementById ("checkbox1");
 const newsletter = document.getElementById ("checkbox2");
 const btnSubmit = document.querySelector (".btn-submit");
 
-// launch modal event clic
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
 }
 
-// close modal button clic
-modalBtnClose.addEventListener("click", function() {
-  modalbg.style.display = "none";
-});
+// launch modal event clic
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+
+// close modal form
+function closeModal () {
+  modalbg.style.display = "none"
+}
+
+// close modal event clic
+modalBtnClose.addEventListener("click", closeModal);
