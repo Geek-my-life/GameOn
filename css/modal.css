@@ -14,7 +14,6 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -30,11 +29,12 @@ img {
 }
 
 .topnav {
-  overflow: hidden;
   margin: 3.5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .header-logo {
-    float: left;
     margin-top: 10px;
 }
 @media screen and (max-width: 768px) {
@@ -43,14 +43,14 @@ img {
 }
 }
 .main-navbar {
-    float: right;
+    display: flex;
+    z-index: 1000;
 }
 .topnav a {
-  float: left;
   display: block;
   color: #000000;
   text-align: center;
-  padding: 8px 8px;
+  padding: 6px 10px;
   margin: auto;
   text-decoration: none;
   font-size: 20px;
@@ -73,13 +73,21 @@ img {
   display: none;
   font-size: 30px;
   color: #ff0000;
-  position: absolute;
-  right: 10px;
-  top: 25px;
 }
 
 @media screen and (max-width: 768px) {
-  .topnav a {display: none;}
+  body {
+    max-width: 95%;
+  }
+  .main-navbar {
+    display: block;
+    z-index: 1000;
+    background-color: white;
+  }
+  .topnav a {
+    display: none;
+    text-align: left;
+  }
   .topnav a.icon {
     display: block;
   }
@@ -87,28 +95,21 @@ img {
 
 @media screen and (max-width: 768px) {
   .topnav.responsive {position: relative;}
+  .topnav.responsive .main-navbar {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    z-index: 1000;
+  }
   .topnav.responsive .icon {
     position: absolute;
+    top: -45px;
     right: 0;
-    top: 10px;
   }
   .topnav.responsive a {
-    float: none;
     display: block;
-    text-align: left;
   }
 }
-
-
-
- @media screen and (max-width: 540px) {
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
-} 
 
 main {
   font-size: 130%;
@@ -488,6 +489,9 @@ footer {
   margin: 0 20px;
 }
 @media screen and (max-width: 800px) {
+  body {
+    max-width: 95%;
+  }
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -509,7 +513,7 @@ footer {
   }
   .hero-text {
     margin-top: 30px;
-    width: unset;
+    width: 80%;
     font-size: 15px;
   }
   .hero-img img {
