@@ -44,7 +44,7 @@ img {
 }
 .main-navbar {
     display: flex;
-    z-index: 1000;
+    z-index: 2;
 }
 .topnav a {
   display: block;
@@ -81,7 +81,6 @@ img {
   }
   .main-navbar {
     display: block;
-    z-index: 1000;
     background-color: white;
   }
   .topnav a {
@@ -97,17 +96,22 @@ img {
   .topnav.responsive {position: relative;}
   .topnav.responsive .main-navbar {
     position: absolute;
-    top: 45px;
-    right: 0;
-    z-index: 1000;
-  }
-  .topnav.responsive .icon {
-    position: absolute;
-    top: -45px;
-    right: 0;
+    top: 46px;
+    right: 1px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #ff0000;
   }
   .topnav.responsive a {
     display: block;
+    border-radius: 0px;
+  }
+  .topnav.responsive .icon {
+    position: absolute;
+    top: -46px;
+    right: 1px;
+    border-radius: 15px;
+
   }
 }
 
