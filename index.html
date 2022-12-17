@@ -54,7 +54,7 @@
       <div class="content">
         <span class="close"></span>
         <div class="modal-body">
-          <form name="reserve" action="index.html" method="get" onsubmit="return validate();">
+          <form id="validationForm" name="reserve" action="index.html" method="get" onsubmit="return validate();">
             <div class="formData">
               <label>Prénom</label><br>
               <input class="text-control" type="text" id="first" name="first" minlength="2" /><br>
@@ -117,19 +117,18 @@
               </label>
               <br>
             </div>
-            <input class="btn-submit" type="submit" class="button" value="C'est parti" />
+            <input id="btn-submit" class="btn-submit" type="submit" class="button" value="C'est parti" />
           </form>
         </div>
       </div>
     </div>
-    <div id="validatebox" class="validatebox">
-      <p>Votre demande d'inscription a bien été envoyée</p>
-      <button>ok</button>
+    <div id="bgroundValidateBox" class="bgroundValidateBox">
+      <div id="validatebox" class="validatebox">
+        <p>Merci ! Votre réservation a été reçue.</p>
+        <button id="btnValidate">ok</button>
+      </div>
     </div>
-    <div id="errorbox" class="errorbox">
-      <p>! Veuillez vérifier les données saisies</p>
-      <button>ok</button>
-    </div>
+    
   </main>
   <footer>
     <p class="copyrights">
