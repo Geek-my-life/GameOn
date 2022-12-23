@@ -3,10 +3,10 @@ const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
 const email = document.getElementById("email");
 const quantity = document.getElementById("quantity");
-const birthdate = document.getElementById("birthdate");
+const inputBirthdate = document.getElementById("birthdate");
 const allLocations = document.getElementById("allLocations");
 const locations = document.querySelectorAll("#allLocations .checkbox-input");
-const checkbox1 = document.getElementById("checkbox1");
+const conditions = document.getElementById("checkbox1");
 const input = document.getElementsByClassName("text-control");
 const form = document.getElementById("form");
 const regEx = /^([A-Za-z]){2,}?([-]){0,}?([A-Za-z]){0,}/;
@@ -58,6 +58,34 @@ function checkEmail() {
 }
 
 // verification anniversaire
+inputBirthdate.addEventListener("input", checkAge);
+
+function checkAge() {
+  const birthdate = new Date(inputBirthdate.value);
+  const age = calculateAge(birthdate);
+  if (age < 18) {
+    inputBirthdate.parentElement.setAttribute("data-error-visible", "true");
+    inputBirthdate.style.border = "2px solid #e54858";
+    return false;
+  } else {
+    inputBirthdate.parentElement.setAttribute("data-error-visible", "false");
+    inputBirthdate.style.border = "solid #279e7a 0.19rem";
+    return true;
+  }
+}
+
+function calculateAge(birthdate) {
+  const currentDate = new Date();
+  let age = currentDate.getFullYear() - birthdate.getFullYear();
+  const monthDiff = currentDate.getMonth() - birthdate.getMonth();
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && currentDate.getDate() < birthdate.getDate())
+  ) {
+    age--;
+  }
+  return age;
+}
 
 // verification participation tournoi
 quantity.addEventListener("input", checkQuantity);
@@ -76,3 +104,14 @@ function checkQuantity() {
 // verification villes
 
 // verification conditions
+conditions.addEventListener("input", checkConditions);
+
+function checkConditions() {
+  if (conditions.checked === false) {
+    conditions.parentElement.setAttribute("data-error-visible", "true");
+    return false;
+  } else {
+    conditions.parentElement.setAttribute("data-error-visible", "false");
+    return true;
+  }
+}
