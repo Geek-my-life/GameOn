@@ -14,44 +14,44 @@ const regExMail =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 // verification prénom nom
-firstName.addEventListener(
-  "input", // event à la saisie
-  function () {
-    // on appelle une fonction
-    checkInputText(firstName); // la fonction et l'element que l'on souhaite
-  },
-  false
-);
-lastName.addEventListener(
-  "input",
-  function () {
-    checkInputText(lastName);
-  },
-  false
-);
+firstName.addEventListener("input", checkFirst);
 
-function checkInputText(element) {
-  if (!element.value.match(regEx)) {
-    element.parentElement.setAttribute("data-error-visible", "true");
-    element.style.border = "2px solid #e54858";
+function checkFirst() {
+  if (!firstName.value.match(regEx)) {
+    firstName.parentElement.setAttribute("data-error-visible", "true"); // mise en forme si error vrai
+    firstName.style.border = "2px solid #e54858";
     return false;
   } else {
-    element.parentElement.setAttribute("data-error-visible", "false");
-    element.style.border = "solid #279e7a 0.19rem";
+    firstName.parentElement.setAttribute("data-error-visible", "false"); // mise en forme si error faux
+    firstName.style.border = "solid #279e7a 0.19rem";
     return true;
   }
 }
 
+lastName.addEventListener("input", checkLast);
+
+function checkLast() {
+  if (!lastName.value.match(regEx)) {
+    lastName.parentElement.setAttribute("data-error-visible", "true"); // mise en forme si error vrai
+    lastName.style.border = "2px solid #e54858";
+    return false;
+  } else {
+    lastName.parentElement.setAttribute("data-error-visible", "false"); // mise en forme si error faux
+    lastName.style.border = "solid #279e7a 0.19rem";
+    return true;
+  }
+}
 // verification mail
 email.addEventListener("input", checkEmail);
 
 function checkEmail() {
   if (!email.value.match(regExMail)) {
-    email.parentElement.setAttribute("data-error-visible", "true");
+    // verification de la regex
+    email.parentElement.setAttribute("data-error-visible", "true"); // mise en forme si error vrai
     email.style.border = "2px solid #e54858";
     return false;
   } else {
-    email.parentElement.setAttribute("data-error-visible", "false");
+    email.parentElement.setAttribute("data-error-visible", "false"); // mise en forme si error faux
     email.style.border = "solid #279e7a 0.19rem";
     return true;
   }
@@ -61,26 +61,26 @@ function checkEmail() {
 inputBirthdate.addEventListener("input", checkAge);
 
 function checkAge() {
-  const birthdate = new Date(inputBirthdate.value);
-  const age = calculateAge(birthdate);
-  if (age < 18) {
-    inputBirthdate.parentElement.setAttribute("data-error-visible", "true");
+  const birthdate = new Date(inputBirthdate.value); // variable pour la valeur de la date saisie
+  const age = calculateAge(birthdate); // variable qui va recuprer la fonction
+  if (inputBirthdate.value.length === 0 || age < 18) {
+    inputBirthdate.parentElement.setAttribute("data-error-visible", "true"); // mise en forme si error vrai
     inputBirthdate.style.border = "2px solid #e54858";
     return false;
   } else {
-    inputBirthdate.parentElement.setAttribute("data-error-visible", "false");
+    inputBirthdate.parentElement.setAttribute("data-error-visible", "false"); // mise en forme si error faux
     inputBirthdate.style.border = "solid #279e7a 0.19rem";
     return true;
   }
 }
 
 function calculateAge(birthdate) {
-  const currentDate = new Date();
-  let age = currentDate.getFullYear() - birthdate.getFullYear();
-  const monthDiff = currentDate.getMonth() - birthdate.getMonth();
+  const currentDate = new Date(); // variable de la date du jour
+  let age = currentDate.getFullYear() - birthdate.getFullYear(); // calcul de la différence
+  const monthDiff = currentDate.getMonth() - birthdate.getMonth(); // calcul pour voir si le mois est passé
   if (
     monthDiff < 0 ||
-    (monthDiff === 0 && currentDate.getDate() < birthdate.getDate())
+    (monthDiff === 0 && currentDate.getDate() < birthdate.getDate()) // calcul pour voir si le jour est passé
   ) {
     age--;
   }
@@ -92,26 +92,79 @@ quantity.addEventListener("input", checkQuantity);
 
 function checkQuantity() {
   if (quantity.value.length === 0 || quantity.value < 0) {
-    quantity.parentElement.setAttribute("data-error-visible", "true");
+    // verif si pas de saisie ou si 0
+    quantity.parentElement.setAttribute("data-error-visible", "true"); // mise en forme si error vrai
     quantity.style.border = "2px solid #e54858";
     return false;
   } else {
-    quantity.parentElement.setAttribute("data-error-visible", "false");
+    quantity.parentElement.setAttribute("data-error-visible", "false"); // mise en forme si error faux
     quantity.style.border = "solid #279e7a 0.19rem";
     return true;
   }
 }
 // verification villes
+allLocations.addEventListener("change", checkLocations);
+
+function checkLocations() {
+  allLocations.setAttribute("data-error-visible", "true"); // mise en forme si error vrai
+  for (let i = 0; i < locations.length; i++) {
+    // verif si 0 checked
+    if (locations[i].checked) {
+      allLocations.setAttribute("data-error-visible", "false"); // mise en forme si error faux
+      return true;
+    }
+  }
+  return false;
+}
 
 // verification conditions
-conditions.addEventListener("input", checkConditions);
+conditions.addEventListener("change", checkConditions);
 
 function checkConditions() {
   if (conditions.checked === false) {
-    conditions.parentElement.setAttribute("data-error-visible", "true");
+    // verif si checked
+    conditions.parentElement.setAttribute("data-error-visible", "true"); // mise en forme si vrai
     return false;
   } else {
-    conditions.parentElement.setAttribute("data-error-visible", "false");
+    conditions.parentElement.setAttribute("data-error-visible", "false"); // mise en forme si faux
     return true;
   }
 }
+
+// validation globale
+function checkAll() {
+  checkFirst();
+  checkLast();
+  checkEmail();
+  checkAge();
+  checkQuantity();
+  checkLocations();
+  checkConditions();
+}
+
+function validForm() {
+  if (
+    checkFirst() === true &&
+    checkLast() === true &&
+    checkEmail() === true &&
+    checkAge() === true &&
+    checkQuantity() === true &&
+    checkLocations() === true &&
+    checkConditions() === true
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// envoi formulaire
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  if (validForm() == true) {
+    displayModalSubmit();
+    document.querySelector("form").reset();
+  } else {
+    checkAll();
+  }
+});
